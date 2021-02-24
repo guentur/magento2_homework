@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Training\TestOM\Model\ManagerInterface" type="Training\AreaSpecificTestOM\Model\Manager" />
+    <type name="Training\TestOM\Model\Test">
+        <arguments>
+            <argument name="arrayList" xsi:type="array">
+                <item name="item_1" xsi:type="string">array custom array text item area specific</item>
+                <item name="item_5" xsi:type="number">6004444444444</item>
+            </argument>
+        </arguments>
+    </type>
+</config>
