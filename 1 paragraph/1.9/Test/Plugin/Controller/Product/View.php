@@ -18,9 +18,12 @@ class View
         \Magento\Customer\Model\Session $customerSession,
         \Magento\Framework\Controller\Result\RedirectFactory $redirectFactory
     ) {
+        $this->customerSession = $customerSession;
+        $this->redirectFactory = $redirectFactory;
     }
+
     public function aroundExecute(
-        \Training\Test\Plugin\Controller\Product\View $subject,
+        \Magento\Catalog\Controller\Product\View $subject,
         \Closure $proceed
     ) {
         if (!$this->customerSession->isLoggedIn()) {
