@@ -7,22 +7,30 @@
  */
 
 namespace Training\Test\Controller\Page;
+use Magento\Cms\Helper\Page as PageHelper;
+use Magento\Framework\App\RequestInterface;
 use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Framework\Controller\Result\ForwardFactory;
+use Magento\Framework\App\Action\Context;
+use Magento\Framework\Controller\Result\JsonFactory;
+use Magento\Cms\Api\PageRepositoryInterface;
 
-class View extends \Magento\Cms\Controller\Page
+class View extends \Magento\Cms\Controller\Page\View
 {
     protected $resultJsonFactory;
     protected $pageRepository;
 
     public function __construct(
-        \Magento\Framework\App\Action\Context $context,
-        \Magento\Framework\Controller\Result\ForwardFactory $resultForwardFactory,
-        \Magento\Framework\Controller\Result\JsonFactory $resultJsonFactory,
-        \Magento\Cms\Api\PageRepositoryInterface $pageRepository
+        Context $context,
+        ForwardFactory $resultForwardFactory,
+        RequestInterface $request,
+        PageHelper $pageHelper,
+        JsonFactory $resultJsonFactory,
+        PageRepositoryInterface $pageRepository
     ) {
         $this->resultJsonFactory = $resultJsonFactory;
         $this->pageRepository = $pageRepository;
-        parent::__construct($context);
+        parent::__construct($context, $request, $pageHelper, $resultForwardFactory);
     }
 
     public function execute()
@@ -30,7 +38,7 @@ class View extends \Magento\Cms\Controller\Page
         if ($this->getRequest()->isAjax()) {
             $data = ['status' => 'success', 'message' => ''];
 
-            $pageId = $this->getRequest->getParam('page_id', $this->getRequest()->getParam('id', false));
+            $pageId = $this->getRequest()->getParam('page_id', $this->getRequest()->getParam('id', false));
             $resultJson = $this->resultJsonFactory->create();
 
             try {
