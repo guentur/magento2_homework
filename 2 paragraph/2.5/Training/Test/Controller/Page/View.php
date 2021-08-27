@@ -7,6 +7,7 @@
  */
 
 namespace Training\Test\Controller\Page;
+
 use Magento\Cms\Helper\Page as PageHelper;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\Exception\NoSuchEntityException;
@@ -17,9 +18,24 @@ use Magento\Cms\Api\PageRepositoryInterface;
 
 class View extends \Magento\Cms\Controller\Page\View
 {
+    /**
+     * @var JsonFactory
+     */
     protected $resultJsonFactory;
+
+    /**
+     * @var PageRepositoryInterface
+     */
     protected $pageRepository;
 
+    /**
+     * @param Context $context
+     * @param ForwardFactory $resultForwardFactory
+     * @param RequestInterface $request
+     * @param PageHelper $pageHelper
+     * @param JsonFactory $resultJsonFactory
+     * @param PageRepositoryInterface $pageRepository
+     */
     public function __construct(
         Context $context,
         ForwardFactory $resultForwardFactory,
