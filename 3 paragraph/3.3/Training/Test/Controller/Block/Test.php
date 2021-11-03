@@ -32,12 +32,12 @@ class Test extends \Magento\Framework\App\Action\Action
     public function execute()
     {
         $layout = $this->layoutFactory->create();
-        $result = $this->rawResultFactory->create();
-
-        $result->setHeader('Content-Type', 'text/html');
+        $resultRaw = $this->rawResultFactory->create();
         $block = $layout->createBlock('Training\Test\Block\Test');
-        $result->setContents($block->toHtml());
 
-        return $result;
+        $resultRaw->setHeader('Content-Type', 'text/html');
+        $resultRaw->setContents($block->toHtml());
+
+        return $resultRaw;
     }
 }
