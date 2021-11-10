@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+
+<page layout="1column"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <title>My title!!!!!!!</title>
+    </head>
+    <body>
+        <referenceBlock name="testargument" remove="true"/>
+
+        <referenceContainer name="content" >
+            <block template="Training_Render::fullpage_layout.phtml" name="training.onecolumn.block" />
+            <block template="Training_Render::form.phtml" name="training.form">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Training\Render\ViewModel\Form</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>
