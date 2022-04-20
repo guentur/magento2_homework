@@ -1,0 +1,27 @@
+<?php
+
+/** @var \Magento\Framework\View\Element\Template $block */
+/** @var \Magento\Framework\Escaper $escaper */
+?>
+
+<div data-bind="scope: 'randomReview'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+</div>
+
+<script type="text/x-magento-init">
+{
+    "*": {
+        "Magento_Ui/js/core/app": {
+            "components": {
+                "randomReview": {
+                    "component": "Training_Test/js/component/random-review",
+                    "config": {
+                        "template": "Training_Test/random-review",
+                        "url": <?= json_encode( $block->getUrl('training/index/reviews')) ?>
+                    }
+                }
+            }
+        }
+    }
+}
+</script>
