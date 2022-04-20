@@ -3,11 +3,10 @@
 /** @var \Magento\Framework\View\Element\Template $block */
 /** @var \Magento\Framework\Escaper $escaper */
 ?>
-<div class="layout-debug"></div>
 
 <script type="text/x-magento-init">
 {
-    ".layout-debug": {
+    "*": {
         "Training_Js/js/layout-debug": {
             "xml": "<?= $escaper->escapeJs($block->getLayout()->getXmlString()) ?>"
         }
