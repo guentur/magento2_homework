@@ -1,0 +1,28 @@
+<?php
+
+/** @var \Magento\Framework\View\Element\Template $block */
+/** @var \Magento\Framework\Escaper $escaper */
+?>
+
+<div data-bind="scope: 'availableQty'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+</div>
+
+<script type="text/x-magento-init">
+{
+    "*": {
+        "Magento_Ui/js/core/app": {
+            "components": {
+                "availableQty": {
+                    "component": "Training_Test/js/component/qty-in-stock",
+                    "config": {
+                        "template": "Training_Test/available-qty",
+                        "rowResult": "<?= __('Available Qty: ') ?>",
+                        "url": "<?= $escaper->escapeJs( $block->getUrl('training_front/index/availableQty')) ?>"
+                    }
+                }
+            }
+        }
+    }
+}
+</script>
