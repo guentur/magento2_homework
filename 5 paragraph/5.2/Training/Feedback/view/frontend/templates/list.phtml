@@ -1,0 +1,44 @@
+<?php
+/** @var \Magento\Framework\View\Element\Template $block */
+/** @var \Magento\Framework\Escaper $escaper */
+/** @var \Training\Feedback\ViewModel\FeedbackForm $feedbackFormVM */
+
+$feedbackFormVM = $block->getData('form_view_model');
+?>
+
+<div>
+    <div class="toolbar">
+        <div class="action">
+            <button id="add" title="<?php __('Add Feedback') ?>"
+                    type="button" class="action scalable primary"
+                    onclick="location.href = '<?php echo $block->escapeUrl($feedbackFormVM->getFeedbackFormUrl()) ?>';"
+            >
+                <span><?php echo __('Add feedback') ?></span>
+            </button>
+        </div>
+        <?= $block->getPaginationHtml() ?>
+    </div>
+    <div class="feedback-statistic">
+        <p><?= __('Total number of submitted feedbacks: %1', $block->getAllFeedbacksCount()) ?></p>
+        <p><?= __('Total number of active feedbacks: %1', $block->getFeedbackCollection()->getSize()) ?></p>
+    </div>
+    <div class="feedback-list">
+        <?php
+        /** @var \Training\Feedback\Model\Feedback $feedback */
+        foreach ($block->getFeedbackCollection() as $feedback):
+        ?>
+        <div class="feedback-item" style="background-color: #55ecf4; margin: 5px;">
+            <p>
+                <?= $escaper->escapeHtml($feedback->getAuthorName()) ?>
+                <?= $block->getFeedbackDate($feedback); ?>
+            </p>
+            <p>
+                <?= $escaper->escapeHtml($feedback->getMessage()) ?>
+            </p>
+        </div>
+        <?php endforeach; ?>
+    </div>
+    <div class="toolbar">
+        <?= $block->getPaginationHtml() ?>
+    </div>
+</div>
