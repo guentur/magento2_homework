@@ -37,7 +37,7 @@ $viewModel = $block->getData('view_model');
                 class="input-text" type="email" data-validate="{required:true, 'validate-email':true}"/>
             </div>
         </div>
-        <div class="field sku required">
+        <div class="field sku">
             <label class="label" for="related_products_sku">
                 <span><?= $escaper->escapeHtml(__('Related products sku')) ?></span>
             </label>
@@ -45,7 +45,7 @@ $viewModel = $block->getData('view_model');
                 <input name="related_products_sku" id="related_products_sku"
                        title="<?= $escaper->escapeHtmlAttr(__('Related products sku')) ?>"
                        value=""
-                       class="input-text" type="email" data-validate="{required:true, 'validate-email':true}"/>
+                       class="input-text" type="text" data-validate="{}"/>
             </div>
         </div>
         <div class="field comment required">

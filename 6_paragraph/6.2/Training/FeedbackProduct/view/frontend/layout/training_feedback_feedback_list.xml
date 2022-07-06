@@ -4,11 +4,11 @@
     <body>
         <referenceBlock name="feedback_list"
                template="Training_FeedbackProduct::list.phtml">
-<!--            <arguments>-->
-<!--                <argument name="form_view_model" xsi:type="object">-->
-<!--                    Training\Feedback\ViewModel\FeedbackForm-->
-<!--                </argument>-->
-<!--            </arguments>-->
+            <arguments>
+                <argument name="related_products_view_model" xsi:type="object">
+                    Training\FeedbackProduct\ViewModel\RelatedProducts
+                </argument>
+            </arguments>
         </referenceBlock>
     </body>
 </page>

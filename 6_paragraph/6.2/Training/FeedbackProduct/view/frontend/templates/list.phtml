@@ -2,9 +2,10 @@
 /** @var \Magento\Framework\View\Element\Template $block */
 /** @var \Magento\Framework\Escaper $escaper */
 /** @var \Training\Feedback\ViewModel\FeedbackForm $feedbackFormVM */
+/** @var \Training\FeedbackProduct\ViewModel\RelatedProducts $feedbackRelatedProductsVM */
 
 $feedbackFormVM = $block->getData('form_view_model');
-$feedbackFormVM = $block->getData('form_view_model');
+$feedbackRelatedProductsVM = $block->getData('related_products_view_model');
 ?>
 
 <div>
@@ -21,17 +22,26 @@ $feedbackFormVM = $block->getData('form_view_model');
     </div>
     <div class="feedback-list">
         <?php
-        /** @var \Training\Feedback\Model\Feedback $feedback */
+        /** @var \Training\Feedback\Api\Data\FeedbackInterface $feedback */
         foreach ($block->getFeedbackCollection() as $feedback):
         ?>
         <div class="feedback-item" style="background-color: #55ecf4; margin: 5px;">
             <p>
                 <?= $escaper->escapeHtml($feedback->getAuthorName()) ?>
                 <?= $block->getFeedbackDate($feedback); ?>
-                <?= $block->getFeedbackDate($feedback); ?>
             </p>
             <p>
                 <?= $escaper->escapeHtml($feedback->getMessage()) ?>
+            </p>
+            <p>
+                <span>Related products: </span>
+                <?php
+                    $relatedProducts = $feedbackRelatedProductsVM->getRelatedProducts($feedback);
+                    /** @var \Magento\Catalog\Api\Data\ProductInterface $relatedProduct */
+                    foreach ($relatedProducts as $relatedProduct) {
+                        echo $relatedProduct->getSku();
+                    }
+                ?>
             </p>
         </div>
         <?php endforeach; ?>
