@@ -1,20 +1,23 @@
 <?xml version="1.0"?>
 <schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
-    <table name="training_feedback_related_skus" resource="default" engine="innodb" comment="Training Feedback table">
+    <table name="training_feedback_product" resource="default" engine="innodb" comment="Training Feedback table">
         <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true"
                 comment="Primary key"/>
         <column xsi:type="int" name="feedback_id" padding="10" unsigned="true" nullable="false"
                 comment="Foreign key"/>
-        <column xsi:type="varchar" name="related_product_sku" nullable="false" length="64" comment="SKU"/>
+        <column xsi:type="int" name="product_id" padding="10" nullable="false" unsigned="true"/>
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="entity_id"/>
         </constraint>
-        <constraint xsi:type="foreign" referenceId="RELATED_PRODUCT_SKUS_PRODUCT_ENTITY_SKUS"
-                    table="training_feedback_related_skus" column="related_product_sku"
-                    referenceTable="catalog_product_entity" referenceColumn="sku" onDelete="CASCADE"/>
+<!--        <constraint xsi:type="foreign" referenceId="RELATED_PRODUCT_SKUS_PRODUCT_ENTITY_SKUS"-->
+<!--                    table="training_feedback_product" column="related_product_sku"-->
+<!--                    referenceTable="catalog_product_entity" referenceColumn="sku" onDelete="CASCADE"/>-->
         <constraint xsi:type="foreign" referenceId="FEEDBACK_ID_TO_REFERENCE_ENTITY_ID"
-                    table="training_feedback_related_skus" column="feedback_id"
+                    table="training_feedback_product" column="feedback_id"
                     referenceTable="training_feedback" referenceColumn="entity_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="TRAINING_FEEDBACK_PRODUCT_PRODUCT_ID"
+                    table="training_feedback_product" column="product_id"
+                    referenceTable="catalog_product_entity" referenceColumn="entity_id" onDelete="CASCADE"/>
     </table>
 </schema>

@@ -10,5 +10,17 @@
             "TRAINING_FEEDBACK_RELATED_SKUS_RELATED_PRD_SKU_CAT_PRD_ENTT_SKU": true,
             "FK_2F47CCE7FDAD4EB5794219274A8957DD": true
         }
+    },
+    "training_feedback_product": {
+        "column": {
+            "entity_id": true,
+            "feedback_id": true,
+            "product_id": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "TRAINING_FEEDBACK_PRD_FEEDBACK_ID_TRAINING_FEEDBACK_ENTT_ID": true,
+            "TRAINING_FEEDBACK_PRD_PRD_ID_CAT_PRD_ENTT_ENTT_ID": true
+        }
     }
 }
