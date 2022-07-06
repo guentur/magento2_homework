@@ -1,0 +1,14 @@
+{
+    "training_feedback_related_skus": {
+        "column": {
+            "entity_id": true,
+            "feedback_id": true,
+            "related_product_sku": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "TRAINING_FEEDBACK_RELATED_SKUS_RELATED_PRD_SKU_CAT_PRD_ENTT_SKU": true,
+            "FK_2F47CCE7FDAD4EB5794219274A8957DD": true
+        }
+    }
+}
