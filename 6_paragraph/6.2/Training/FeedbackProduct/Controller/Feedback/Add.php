@@ -69,15 +69,9 @@ class Add extends FeedbackAdd
                     __('Thank you for your feedback.')
                 );
             } catch(\Exception $e) {
-//                $this->messageManager->addErrorMessage(
-//                    __('An error occurred while processing your form. Please try again later.')
-//                );
                 $this->messageManager->addErrorMessage(
-                    $e->getMessage()
+                    __('An error occurred while processing your form. Please try again later.')
                 );
-                echo $e->getMessage();
-                echo $e->getTraceAsString();
-                exit();
                 $resultRedirect->setPath('*/*/form');
             }
         }
