@@ -4,4 +4,41 @@
     <preference for="Training\Feedback\Api\Data\FeedbackInterface" type="Training\Feedback\Model\Feedback" />
     <preference for="Training\Feedback\Api\Data\FeedbackSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
     <preference for="Training\Feedback\Api\FeedbackRepositoryInterface" type="Training\Feedback\Model\ResourceModel\FeedbackRepository" />
+
+    <virtualType name="DefaultFeedbackCollectionFilters"
+                 type="Magento\Framework\Api\SearchCriteria\CollectionProcessor\FilterProcessor">
+        <arguments>
+<!--            It does not work because the method Magento\Framework\Api\SearchCriteria\CollectionProcessor\FilterProcessor\CustomFilterInterface::apply-->
+<!--            executes only if user give a SearchCriteria to Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface::process() -->
+<!--            with filter is_active (@see Magento\Framework\Api\SearchCriteria\CollectionProcessor\FilterProcessor)-->
+            <argument name="customFilters" xsi:type="array">
+                <item name="is_active" xsi:type="object">Training\Feedback\Model\Api\SearchCriteria\CollectionProcessor\FilterProcessor\IsActiveFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="DefaultFeedbackCollectionOrders"
+                 type="Magento\Framework\Api\SearchCriteria\CollectionProcessor\SortingProcessor">
+        <arguments>
+            <argument name="defaultOrders" xsi:type="array">
+                <item name="created_at" xsi:type="const">Magento\Framework\Api\SortOrder::SORT_DESC</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Training\Feedback\Model\Api\SearchCriteria\FeedbackCollectionProcessor" type="Magento\Framework\Api\SearchCriteria\CollectionProcessor">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="filters" xsi:type="object">DefaultFeedbackCollectionFilters</item>
+                <item name="sorting" xsi:type="object">DefaultFeedbackCollectionOrders</item>
+                <item name="pagination" xsi:type="object">Magento\Framework\Api\SearchCriteria\CollectionProcessor\PaginationProcessor</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Training\Feedback\Block\FeedbackList">
+        <arguments>
+            <argument name="collectionProcessor" xsi:type="object">Training\Feedback\Model\Api\SearchCriteria\FeedbackCollectionProcessor</argument>
+        </arguments>
+    </type>
 </config>
