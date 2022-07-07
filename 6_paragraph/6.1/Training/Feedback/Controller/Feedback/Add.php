@@ -57,6 +57,7 @@ class Add implements HttpPostActionInterface
         RedirectFactory $redirectF,
         FeedbackModelFactory $feedbackF,
         FeedbackResourceModel $feedbackResourceModel,
+        \Training\Feedback\Api\FeedbackRepositoryInterface $feedbackRepository,
         ManagerInterface $messageManager,
         RequestInterface $request
     ) {
@@ -77,7 +78,6 @@ class Add implements HttpPostActionInterface
         if ($post = $this->request->getPostValue()) {
             try {
                 $this->validateRequest($post);
-
                 $feedbackModel = $this->feedbackF->create();
 
                 if (!empty($this->request->getParam('author_name'))) {
@@ -107,7 +107,7 @@ class Add implements HttpPostActionInterface
      * @return void
      * @throws LocalizedException
      */
-    private function validateRequest($post)
+    protected function validateRequest($post)
     {
         if (!isset($post['author_email']) || trim($post['author_email']) === '') {
             throw new LocalizedException(__('Email is missing'));
